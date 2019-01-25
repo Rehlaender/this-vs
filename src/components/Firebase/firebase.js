@@ -17,9 +17,8 @@ class Firebase {
     this.db = app.database();
   }
 
-  issue = uid => this.db.ref(`issues/${uid}`);
-
-  issues = () => this.db.ref('issues');
+  answers = () => this.db.ref('answers');
+  questions = () => this.db.ref('questions');
 }
 
 export default Firebase;
