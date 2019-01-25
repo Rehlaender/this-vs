@@ -66,7 +66,7 @@ const newQuestion = () => {
       date: getTodayAsUUIDString(),
       question: newQuestionInput.current.value
     }
-
+    console.log(response, 'jaj response')
     // submitQuestion(response);
   }
   return (

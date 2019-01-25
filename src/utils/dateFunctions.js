@@ -5,5 +5,5 @@ export const getToday = () => {
 
 export const getTodayAsUUIDString = () => {
   const today = new Date();
-  const formatedToday = `${today.getMonth() + 1}${today.getDate()}${today.getFullYear()}`;
+  return `${today.getMonth() + 1}${today.getDate()}${today.getFullYear()}`;
 }
