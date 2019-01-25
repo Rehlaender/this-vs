@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { getToday, getTodayAsUUIDString } from './utils';
 
 import { withFirebase } from './components/Firebase';
 
@@ -37,6 +37,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h3>question of the day:</h3>
+          {newQuestion()}
           {loading && <h4>loading...</h4>}
           {!loading && questions && questions.map((question, key) => questionOfTheDay(question, key))}
         </header>
@@ -53,7 +54,30 @@ const questionOfTheDay = (props, key) => {
       <p>{question}</p>
       {answerSection(uuid)}
     </div>
+  )
+}
 
+const newQuestion = () => {
+  const today = getToday();
+  const newQuestionInput = React.createRef();
+
+  const handleSubmit = () => {
+    const response = {
+      date: getTodayAsUUIDString(),
+      question: newQuestionInput.current.value
+    }
+
+    // submitQuestion(response);
+  }
+  return (
+    <div>
+      <p>what is the question of today: {today} </p>
+      <input
+        name="newQuestion"
+        placeholder="newQuestion"
+        ref={newQuestionInput} />
+      <button onClick={handleSubmit}>ask</button>
+    </div>
   )
 }
 
@@ -61,14 +85,14 @@ const answerSection = (uuid) => {
   const answerInput = React.createRef();
   const authorInput = React.createRef();
 
-  const handleSubmit = (event) => {
-    console.log(answerInput.current.value, authorInput.current.value, 'answer');
+  const handleSubmit = () => {
     const response = {
-      answer: answerInput,
-      author: authorInput,
+      answer: answerInput.current.value,
+      author: authorInput.current.value,
       date: uuid
     }
-    console.log(response, 'jaj');
+
+    // submitAnswer(response);
   }
 
   return (
